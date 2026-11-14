@@ -6,3 +6,4 @@ A sleek, modern, and aesthetic web application built with Streamlit to analyze p
 - **Real-time Password Analysis:** Check entropy, crack time, and security risk levels.
 - **Advanced Password Generator:** Custom keyword injection, length adjustment, and complexity toggles.
 - **Aesthetic UI:** Clean tabs, visual progress bars, and instant feedback.
+https://password-suite.streamlit.app/
