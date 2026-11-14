@@ -382,12 +382,13 @@ with tab_generator:
         with t2:
             st.markdown("**Açıklama:** Bu mod, veritabanı tuzlama (salting), API anahtarları veya güvenli oturum tokenleri üretmek için optimize edilmiştir.")
 
-        if st.button("TOKEN / SALT ÜRET", type="primary"):
+  if st.button("TOKEN / SALT ÜRET", type="primary"):
             if token_format == "Hexadecimal (Hex)":
-                raw_token = os_urandom_hex(token_bytes)
+                import os
+                raw_token = os.urandom(token_bytes).hex()
             elif token_format == "Base64":
-                import base64
-                raw_token = base64.b64encode(os_urandom_bytes(token_bytes)).decode('utf-8')
+                import os, base64
+                raw_token = base64.b64encode(os.urandom(token_bytes)).decode('utf-8')
             elif token_format == "URL-Safe Token":
                 import secrets
                 raw_token = secrets.token_urlsafe(token_bytes)
