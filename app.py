@@ -234,14 +234,14 @@ with tab_audit:
                 st.markdown("#### HESAPLANAN BRUTE-FORCE KIRILMA SÜRELERİ")
                 
                 def format_time(seconds):
-                    if seconds == float('inf'): return "Minyarlarca Yıl (Pratikte İmkansız)"
+                    if seconds == float('inf'): return "Milyarlarca Yıl (Pratikte İmkansız)"
                     if seconds < 0.01: return "Anında (< 0.01 sn)"
                     elif seconds < 60: return f"{int(seconds)} Saniye"
                     elif seconds < 3600: return f"{int(seconds/60)} Dakika"
                     elif seconds < 86400: return f"{int(seconds/3600)} Saat"
                     elif seconds < 31536000: return f"{int(seconds/86400)} Gün"
                     elif seconds < 31536000 * 1000: return f"{int(seconds/31536000)} Yıl"
-                    else: return "Minyarlarca Yıl (Pratikte İmkansız)"
+                    else: return "Milyarlarca Yıl (Pratikte İmkansız)"
 
                 st.markdown(f"""
                 - **Online Kısıtlı Saldırı (100 req/s):** `{format_time(res['sec_online'])}`
