@@ -4,6 +4,9 @@ import string
 import math
 import pandas as pd
 import hashlib
+import os      #
+import secrets #
+import base64  #
 
 # Sayfa Yapılandırması (Geniş Ekran Modu)
 st.set_page_config(
