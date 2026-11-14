@@ -4,9 +4,9 @@ import string
 import math
 import pandas as pd
 import hashlib
-import os      #
-import secrets #
-import base64  #
+import os
+import secrets
+import base64
 
 # Sayfa Yapılandırması (Geniş Ekran Modu)
 st.set_page_config(
@@ -382,30 +382,18 @@ with tab_generator:
         with t2:
             st.markdown("**Açıklama:** Bu mod, veritabanı tuzlama (salting), API anahtarları veya güvenli oturum tokenleri üretmek için optimize edilmiştir.")
 
-  if st.button("TOKEN / SALT ÜRET", type="primary"):
+        if st.button("TOKEN / SALT ÜRET", type="primary"):
             if token_format == "Hexadecimal (Hex)":
-                import os
                 raw_token = os.urandom(token_bytes).hex()
             elif token_format == "Base64":
-                import os, base64
                 raw_token = base64.b64encode(os.urandom(token_bytes)).decode('utf-8')
             elif token_format == "URL-Safe Token":
-                import secrets
                 raw_token = secrets.token_urlsafe(token_bytes)
             else:
                 raw_token = "".join(random.choices(string.digits, k=token_bytes))
 
             st.markdown("#### KRİPTOGRAFİK TOKEN ÇIKTISI")
             st.code(raw_token, language="")
-
-# Yardımcı fonksiyonlar (Token modu için)
-def os_urandom_hex(n):
-    import os
-    return os.urandom(n).hex()
-
-def os_urandom_bytes(n):
-    import os
-    return os.urandom(n)
 
 # ==========================================
 # SEKME 3: ALGORİTMA VE UYUMLULUK MATRİSİ
