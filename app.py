@@ -102,13 +102,20 @@ with tab_audit:
         md5_hash = hashlib.md5(pwd.encode()).hexdigest()
         sha256_hash = hashlib.sha256(pwd.encode()).hexdigest()
         
-        # Kırılma Süreleri (Farklı Donanım Vektörleri)
-        total_combos = 2 ** entropy
-        sec_online = total_combos / 100            # Ağ kısıtlı (100 istek/sn)
-        sec_cpu = total_combos / 1e7               # CPU Brute-force (10M/sn)
-        sec_gpu = total_combos / 1e10              # Tekli GPU RTX 4090 (10B/sn)
-        sec_cluster = total_combos / 1e13          # Kurumsal GPU Farm (10T/sn)
-        sec_asic = total_combos / 1e15             # ASIC Donanım (1P/sn)
+        # Kırılma Süreleri (Overflow korumalı güvenli logaritmik hesaplama)
+        try:
+            sec_online = (2 ** entropy) / 100
+            sec_cpu = (2 ** entropy) / 1e7
+            sec_gpu = (2 ** entropy) / 1e10
+            sec_cluster = (2 ** entropy) / 1e13
+            sec_asic = (2 ** entropy) / 1e15
+        except OverflowError:
+            # Çok uzun şifreler için sonsuz güvenli tavan değeri
+            sec_online = float('inf')
+            sec_cpu = float('inf')
+            sec_gpu = float('inf')
+            sec_cluster = float('inf')
+            sec_asic = float('inf')
 
         # Gelişmiş Zafiyet ve Kalıp Tespiti
         penalties = 0
@@ -140,7 +147,7 @@ with tab_audit:
             penalties += 25
             flaws.append("Kritik: Uzunluk 12 karakter eşiğinin altında. Minimum 16 önerilir.")
 
-        # Leet-speak tespiti (örn: e->3, a->@)
+        # Leet-speak tespiti
         leet_map = {'3': 'e', '4': 'a', '1': 'i', '0': 'o', '!': 'i', '$': 's'}
         leet_score = sum(1 for char in pwd if char in leet_map)
         if leet_score > 0 and length < 10:
@@ -227,6 +234,7 @@ with tab_audit:
                 st.markdown("#### HESAPLANAN BRUTE-FORCE KIRILMA SÜRELERİ")
                 
                 def format_time(seconds):
+                    if seconds == float('inf'): return "Minyarlarca Yıl (Pratikte İmkansız)"
                     if seconds < 0.01: return "Anında (< 0.01 sn)"
                     elif seconds < 60: return f"{int(seconds)} Saniye"
                     elif seconds < 3600: return f"{int(seconds/60)} Dakika"
