@@ -8,14 +8,14 @@ import os
 import secrets
 import base64
 
-# Sayfa Yapılandırması (Geniş Ekran Modu)
+# Page Configuration (Wide Layout)
 st.set_page_config(
     page_title="Cryptic Core // Enterprise Intelligence Platform", 
     page_icon=None, 
     layout="wide"
 )
 
-# Profesyonel, Sıfır Emoji, Ağır Siklet Cyber-Security CSS Tasarımı
+# Professional, Zero-Emoji, Heavy-Duty Cyber-Security CSS Styling
 st.markdown("""
 <style>
     .stApp { background-color: #06080f; color: #e2e8f0; font-family: 'Courier New', Courier, monospace; }
@@ -49,12 +49,12 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Üst Bilgi Konsolu
+# Top Header Console
 st.markdown("## [ SYSTEM INTERFACE: CRYPTIC CORE v5.2 ]")
 st.markdown("Advanced Cryptographic Intelligence, Multi-Vector Vulnerability Auditor, and High-Entropy Key Synthesis Terminal.")
 st.markdown("---")
 
-# Ana Sekmeler
+# Main Navigation Tabs
 tab_audit, tab_generator, tab_matrix = st.tabs([
     "DEEP SECURITY & VULNERABILITY AUDITOR", 
     "ADVANCED KEY & PASSPHRASE SYNTHESIZER", 
@@ -62,16 +62,16 @@ tab_audit, tab_generator, tab_matrix = st.tabs([
 ])
 
 # ==========================================
-# SEKME 1: DERİN GÜVENLİK VE ZAFİYET AUDITOR
+# TAB 1: DEEP SECURITY & VULNERABILITY AUDITOR
 # ==========================================
 with tab_audit:
-    st.markdown("### TARGET PAROLA ANALİZ TERMİNALİ")
+    st.markdown("### TARGET PASSWORD ANALYSIS TERMINAL")
     col_input, col_meta = st.columns([2, 1])
     
     with col_input:
-        password_input = st.text_input("Analiz Edilecek Parolayı Girin:", type="password", placeholder="Parola dizilimini buraya yazın...")
+        password_input = st.text_input("Enter Target Password for Audit:", type="password", placeholder="Type or paste password string here...")
     with col_meta:
-        st.markdown("**Tarama Modu:** Tam Spektrumlu Entropi ve Zafiyet Analizi")
+        st.markdown("**Scan Mode:** Full-Spectrum Entropy & Vulnerability Assessment")
 
     def run_advanced_audit(pwd):
         if not pwd:
@@ -84,7 +84,7 @@ with tab_audit:
         has_special = any(c in string.punctuation for c in pwd)
         has_extended = any(ord(c) > 127 for c in pwd)
         
-        # Karakter Havuzu Hesaplama
+        # Character Pool Calculation
         pool = 0
         if has_lower: pool += 26
         if has_upper: pool += 26
@@ -95,14 +95,14 @@ with tab_audit:
         if pool == 0:
             return {"score": 0, "entropy": 0, "status": "INVALID"}
 
-        # Shannon Entropi (Bits)
+        # Shannon Entropy (Bits)
         entropy = length * math.log2(pool)
         
-        # Hash tespiti (MD5 / SHA256 simulasyonu)
+        # Hash Simulation (MD5 / SHA256)
         md5_hash = hashlib.md5(pwd.encode()).hexdigest()
         sha256_hash = hashlib.sha256(pwd.encode()).hexdigest()
         
-        # Kırılma Süreleri (Overflow korumalı güvenli logaritmik hesaplama)
+        # Crack Times (Overflow-protected secure logarithmic calculation)
         try:
             sec_online = (2 ** entropy) / 100
             sec_cpu = (2 ** entropy) / 1e7
@@ -110,62 +110,61 @@ with tab_audit:
             sec_cluster = (2 ** entropy) / 1e13
             sec_asic = (2 ** entropy) / 1e15
         except OverflowError:
-            # Çok uzun şifreler için sonsuz güvenli tavan değeri
             sec_online = float('inf')
             sec_cpu = float('inf')
             sec_gpu = float('inf')
             sec_cluster = float('inf')
             sec_asic = float('inf')
 
-        # Gelişmiş Zafiyet ve Kalıp Tespiti
+        # Advanced Vulnerability & Pattern Detection
         penalties = 0
         flaws = []
         
-        # Klavye yürüyüşleri kontrolü (Keyboard walks)
+        # Keyboard Walks Check
         keyboard_walks = ["qwerty", "asdfgh", "zxcvbn", "123456", "qazwsx", "123321", "password", "admin", "letmein"]
         if any(walk in pwd.lower() for walk in keyboard_walks):
             penalties += 35
-            flaws.append("Kritik: Yaygın klavye yürüyüşü veya sözlük tabanlı zayıf kalıp tespit edildi.")
+            flaws.append("Critical: Common keyboard walk or dictionary-based weak pattern detected.")
 
-        # Ardışık karakterler
+        # Sequential Characters Check
         sequential_count = 0
         for i in range(len(pwd) - 2):
             if ord(pwd[i]) + 1 == ord(pwd[i+1]) and ord(pwd[i+1]) + 1 == ord(pwd[i+2]):
                 sequential_count += 1
         if sequential_count > 0:
             penalties += 15 * sequential_count
-            flaws.append(f"Uyarı: {sequential_count} adet ardışık karakter dizilimi (örn: 123, abc) tespit edildi.")
+            flaws.append(f"Warning: {sequential_count} sequential character sequence(s) (e.g., 123, abc) detected.")
 
-        # Tekrarlayan karakterler
+        # Repetitive Characters Check
         max_rep = max([pwd.count(c) for c in set(pwd)]) if pwd else 0
         if max_rep > length / 3 and length > 4:
             penalties += 20
-            flaws.append("Uyarı: Belirli karakterlerin aşırı tekrarı entropiyi düşürüyor.")
+            flaws.append("Warning: Excessive repetition of specific characters degrades entropy.")
 
-        # Uzunluk denetimi
+        # Length Inspection
         if length < 12:
             penalties += 25
-            flaws.append("Kritik: Uzunluk 12 karakter eşiğinin altında. Minimum 16 önerilir.")
+            flaws.append("Critical: Length is below the 12-character threshold. Minimum 16 is recommended.")
 
-        # Leet-speak tespiti
+        # Leet-speak Detection
         leet_map = {'3': 'e', '4': 'a', '1': 'i', '0': 'o', '!': 'i', '$': 's'}
         leet_score = sum(1 for char in pwd if char in leet_map)
         if leet_score > 0 and length < 10:
             penalties += 15
-            flaws.append("Bilgi: Sığ Leet-speak (karakter değişimi) kullanılmış; gelişmiş dictionary saldırılarına karşı savunmasız.")
+            flaws.append("Notice: Shallow Leet-speak substitution used; vulnerable to advanced dictionary attacks.")
 
-        # Final Skor
+        # Final Score Calculation
         base_score = min(100, int((entropy / 110) * 100))
         final_score = max(0, base_score - penalties)
 
         if final_score < 35:
-            rating = "KRİTİK ZAFİYET SEVİYESİ"
+            rating = "CRITICAL VULNERABILITY LEVEL"
         elif final_score < 65:
-            rating = "ORTA DÜZEY RİSK"
+            rating = "MODERATE RISK PROFILE"
         elif final_score < 85:
-            rating = "GÜVENLİ DİZİLİM"
+            rating = "SECURE STRUCTURING"
         else:
-            rating = "ASKERİ DÜZEYDE DAYANIKLILIK"
+            rating = "MILITARY-GRADE RESISTANCE"
 
         return {
             "length": length,
@@ -193,17 +192,17 @@ with tab_audit:
         
         if res:
             st.markdown("---")
-            st.markdown("### DENETİM METRİKLERİ VE SKORLAR")
+            st.markdown("### AUDIT METRICS & SCORES")
             
             m1, m2, m3, m4 = st.columns(4)
             with m1:
-                st.metric("Shannon Entropi", f"{res['entropy']} bits")
+                st.metric("Shannon Entropy", f"{res['entropy']} bits")
             with m2:
-                st.metric("Güvenlik İndeksi", f"{res['score']} / 100")
+                st.metric("Security Index", f"{res['score']} / 100")
             with m3:
-                st.metric("Durum Değerlendirmesi", res['rating'])
+                st.metric("Status Evaluation", res['rating'])
             with m4:
-                st.metric("Karakter Havuz Boyutu", f"{res['pool']} varyasyon")
+                st.metric("Character Pool Size", f"{res['pool']} variations")
                 
             st.progress(res['score'] / 100)
             
@@ -211,88 +210,88 @@ with tab_audit:
             col_det1, col_det2 = st.columns(2)
             
             with col_det1:
-                st.markdown("#### STRÜKTÜREL YAPI VE HASH ANALİZİ")
+                st.markdown("#### STRUCTURAL & HASH ANALYSIS")
                 st.markdown(f"""
-                - **Karakter Uzunluğu:** `{res['length']} birim`
-                - **Küçük Harf [a-z]:** `{'Mevcut' if res['has_lower'] else 'Eksik'}`
-                - **Büyük Harf [A-Z]:** `{'Mevcut' if res['has_upper'] else 'Eksik'}`
-                - **Sayısal Rakam [0-9]:** `{'Mevcut' if res['has_digit'] else 'Eksik'}`
-                - **Özel Semboller [!@#$]:** `{'Mevcut' if res['has_special'] else 'Eksik'}`
-                - **Genişletilmiş Unicode:** `{'Mevcut' if res['has_extended'] else 'Yok'}`
-                - **MD5 Hash Özet Değeri:** `{res['md5']}`
-                - **SHA-256 Hash Özet Değeri:** `{res['sha256']}`
+                - **String Length:** `{res['length']} units`
+                - **Lowercase Letters [a-z]:** `{'Present' if res['has_lower'] else 'Missing'}`
+                - **Uppercase Letters [A-Z]:** `{'Present' if res['has_upper'] else 'Missing'}`
+                - **Numeric Digits [0-9]:** `{'Present' if res['has_digit'] else 'Missing'}`
+                - **Special Symbols [!@#$]:** `{'Present' if res['has_special'] else 'Missing'}`
+                - **Extended Unicode:** `{'Present' if res['has_extended'] else 'None'}`
+                - **MD5 Hash Digest:** `{res['md5']}`
+                - **SHA-256 Hash Digest:** `{res['sha256']}`
                 """)
                 
-                st.markdown("#### TESPİT EDİLEN ZAFİYETLER VE RİSKLER")
+                st.markdown("#### DETECTED VULNERABILITIES & RISKS")
                 if res['flaws']:
                     for flaw in res['flaws']:
                         st.warning(f"[!] {flaw}")
                 else:
-                    st.success("[+] Bilinen kalıp tabanlı zafiyet veya ardışık dizi saptanmadı.")
+                    st.success("[+] No known pattern-based flaws or sequential sequences detected.")
 
             with col_det2:
-                st.markdown("#### HESAPLANAN BRUTE-FORCE KIRILMA SÜRELERİ")
+                st.markdown("#### CALCULATED BRUTE-FORCE CRACK TIMELINE")
                 
                 def format_time(seconds):
-                    if seconds == float('inf'): return "Milyarlarca Yıl (Pratikte İmkansız)"
-                    if seconds < 0.01: return "Anında (< 0.01 sn)"
-                    elif seconds < 60: return f"{int(seconds)} Saniye"
-                    elif seconds < 3600: return f"{int(seconds/60)} Dakika"
-                    elif seconds < 86400: return f"{int(seconds/3600)} Saat"
-                    elif seconds < 31536000: return f"{int(seconds/86400)} Gün"
-                    elif seconds < 31536000 * 1000: return f"{int(seconds/31536000)} Yıl"
-                    else: return "Milyarlarca Yıl (Pratikte İmkansız)"
+                    if seconds == float('inf'): return "Millennia (Practically Impossible)"
+                    if seconds < 0.01: return "Instantly (< 0.01 sec)"
+                    elif seconds < 60: return f"{int(seconds)} Seconds"
+                    elif seconds < 3600: return f"{int(seconds/60)} Minutes"
+                    elif seconds < 86400: return f"{int(seconds/3600)} Hours"
+                    elif seconds < 31536000: return f"{int(seconds/86400)} Days"
+                    elif seconds < 31536000 * 1000: return f"{int(seconds/31536000)} Years"
+                    else: return "Millennia (Practically Impossible)"
 
                 st.markdown(f"""
-                - **Online Kısıtlı Saldırı (100 req/s):** `{format_time(res['sec_online'])}`
-                - **Tekil Standart CPU (10M/s):** `{format_time(res['sec_cpu'])}`
-                - **Tekli Tüketici GPU (RTX 4090):** `{format_time(res['sec_gpu'])}`
-                - **Kurumsal GPU Havuzu (10T h/s):** `{format_time(res['sec_cluster'])}`
-                - **Özel Donanım ASIC Rig (1P h/s):** `{format_time(res['sec_asic'])}`
+                - **Online Throttled Attack (100 req/s):** `{format_time(res['sec_online'])}`
+                - **Single Standard CPU (10M/s):** `{format_time(res['sec_cpu'])}`
+                - **Single Consumer GPU (RTX 4090):** `{format_time(res['sec_gpu'])}`
+                - **Enterprise GPU Cluster (10T h/s):** `{format_time(res['sec_cluster'])}`
+                - **Custom ASIC Rig (1P h/s):** `{format_time(res['sec_asic'])}`
                 """)
                 
-                st.markdown("#### UYUMLULUK VE İYİLEŞTİRME ÖNERİLERİ")
+                st.markdown("#### COMPLIANCE & HARDENING RECOMMENDATIONS")
                 if res['score'] < 75:
                     st.markdown("""
-                    1. **Kompleksite Artırımı:** Karakter havuzunu tüm setleri kapsayacak şekilde genişletin.
-                    2. **Uzunluk Optimizasyonu:** Minimum 16 ila 24 karakter uzunluğunu hedefleyin.
-                    3. **Kalıp Temizliği:** Sözlük kelimeleri veya ardışık sayı dizgilerini tamamen kaldırın.
+                    1. **Complexity Enhancement:** Expand the character pool to include all available sets.
+                    2. **Length Optimization:** Target a minimum length of 16 to 24 characters.
+                    3. **Pattern Elimination:** Completely remove dictionary words or sequential number strings.
                     """)
                 else:
-                    st.success("[+] Parola yapısı kurumsal ve ulusal güvenlik standartlarına (NIST SP 800-63B) uygundur.")
+                    st.success("[+] Password architecture complies with corporate and national security standards (NIST SP 800-63B).")
 
 # ==========================================
-# SEKME 2: GELİŞMİŞ ŞİFRE ÜRETİCİSİ
+# TAB 2: ADVANCED KEY & PASSPHRASE SYNTHESIZER
 # ==========================================
 with tab_generator:
-    st.markdown("### KRİPTOGRAFİK ANAHTAR VE PAROLA ÜRETİM MOTORU")
+    st.markdown("### CRYPTOGRAPHIC KEY & PASSWORD SYNTHESIS ENGINE")
     
     synth_mode = st.selectbox(
-        "Sentez Modu Seçimi:", 
+        "Select Synthesis Mode:", 
         [
-            "Standart Karakter Havuzu Sentezleyicisi", 
-            "Diceware / Okunabilir Passphrase Üreteci", 
-            "Özel Kalıp ve Anahtar Kelime Enjeksiyon Motoru",
-            "Kriptografik Token ve Salt Üreteci (Hex / Base64)"
+            "Standard Character Pool Synthesizer", 
+            "Diceware / Memorable Passphrase Generator", 
+            "Custom Pattern & Keyword Injection Engine",
+            "Cryptographic Token & Salt Generator (Hex / Base64)"
         ]
     )
     st.markdown("---")
 
-    if synth_mode == "Standart Karakter Havuzu Sentezleyicisi":
+    if synth_mode == "Standard Character Pool Synthesizer":
         c1, c2, c3 = st.columns(3)
         with c1:
-            gen_len = st.slider("Anahtar Uzunluğu (Karakter)", min_value=8, max_value=128, value=24, step=1)
-            batch_qty = st.selectbox("Toplu Üretim Adedi", [1, 5, 10, 25], index=1)
+            gen_len = st.slider("Key Length (Characters)", min_value=8, max_value=128, value=24, step=1)
+            batch_qty = st.selectbox("Batch Generation Count", [1, 5, 10, 25], index=1)
         with c2:
-            inc_u = st.checkbox("Büyük Harf Dahil [A-Z]", value=True)
-            inc_l = st.checkbox("Küçük Harf Dahil [a-z]", value=True)
-            inc_d = st.checkbox("Sayısal Rakam Dahil [0-9]", value=True)
+            inc_u = st.checkbox("Include Uppercase [A-Z]", value=True)
+            inc_l = st.checkbox("Include Lowercase [a-z]", value=True)
+            inc_d = st.checkbox("Include Digits [0-9]", value=True)
         with c3:
-            inc_s = st.checkbox("Özel Karakter Dahil [!@#$]", value=True)
-            exc_ambig = st.checkbox("Belirsiz Karakterleri Ayıkla (l, I, O, 0)", value=True)
-            enforce_types = st.checkbox("Her Seçilen Setten En Az 1 Adet Zorunlu Tut", value=True)
+            inc_s = st.checkbox("Include Special Symbols [!@#$]", value=True)
+            exc_ambig = st.checkbox("Exclude Ambiguous Characters (l, I, O, 0)", value=True)
+            enforce_types = st.checkbox("Enforce at least 1 from each selected set", value=True)
 
-        if st.button("STANDART ANAHTARLARI SENTEZLE", type="primary"):
+        if st.button("SYNTHESIZE STANDARD KEYS", type="primary"):
             pool_chars = ""
             if inc_l: pool_chars += string.ascii_lowercase
             if inc_u: pool_chars += string.ascii_uppercase
@@ -304,9 +303,9 @@ with tab_generator:
                     pool_chars = pool_chars.replace(char, "")
                     
             if not pool_chars:
-                st.error("[HATA] Karakter havuzu boş bırakılamaz. En az bir set seçmelisiniz.")
+                st.error("[ERROR] Character pool cannot be empty. You must select at least one set.")
             else:
-                st.markdown("#### SENTEZLENEN ÇIKTI AKIŞI")
+                st.markdown("#### SYNTHESIZED OUTPUT STREAM")
                 for _ in range(batch_qty):
                     if enforce_types and gen_len >= 4:
                         temp_pwd = []
@@ -323,15 +322,15 @@ with tab_generator:
                         out_key = "".join(random.choices(pool_chars, k=gen_len))
                     st.code(out_key, language="")
 
-    elif synth_mode == "Diceware / Okunabilir Passphrase Üreteci":
+    elif synth_mode == "Diceware / Memorable Passphrase Generator":
         p1, p2, p3 = st.columns(3)
         with p1:
-            w_count = st.slider("Kelime Sayısı", min_value=3, max_value=10, value=5)
+            w_count = st.slider("Word Count", min_value=3, max_value=10, value=5)
         with p2:
-            w_sep = st.selectbox("Kelime Ayracı", ["-", "_", ".", "/", "+", "Boşluk"])
+            w_sep = st.selectbox("Word Separator", ["-", "_", ".", "/", "+", "Space"])
         with p3:
-            add_num_sfx = st.checkbox("Son Ek Sayı Ekle", value=True)
-            cap_init = st.checkbox("Kelime Baş Harflerini Büyük Yap", value=True)
+            add_num_sfx = st.checkbox("Append Suffix Number", value=True)
+            cap_init = st.checkbox("Capitalize Word Initials", value=True)
 
         lexicon = [
             "cyber", "nexus", "quantum", "matrix", "vertex", "vector", "binary", 
@@ -340,57 +339,57 @@ with tab_generator:
             "subnet", "gateway", "payload", "buffer", "token", "hash", "cluster"
         ]
 
-        if st.button("PASSPHRASE SENTEZLE", type="primary"):
+        if st.button("SYNTHESIZE PASSPHRASE", type="primary"):
             chosen_words = random.choices(lexicon, k=w_count)
             if cap_init:
                 chosen_words = [w.capitalize() for w in chosen_words]
             
-            separator = " " if w_sep == "Boşluk" else w_sep
+            separator = " " if w_sep == "Space" else w_sep
             passphrase = separator.join(chosen_words)
             if add_num_sfx:
                 passphrase += f"{separator}{random.randint(100, 999)}"
                 
-            st.markdown("#### SENTEZLENEN PASSPHRASE")
+            st.markdown("#### SYNTHESIZED PASSPHRASE")
             st.code(passphrase, language="")
-            st.info(f"Karakter Uzunluğu: {len(passphrase)} | Okunabilirlik ve Hafıza İndeksi: Yüksek")
+            st.info(f"Character Length: {len(passphrase)} | Readability & Memory Index: High")
 
-    elif synth_mode == "Özel Kalıp ve Anahtar Kelime Enjeksiyon Motoru":
+    elif synth_mode == "Custom Pattern & Keyword Injection Engine":
         k1, k2 = st.columns(2)
         with k1:
-            user_keyword = st.text_input("Zorunlu Anahtar Kelime / İsim Girişi", placeholder="Örn: projectAlpha")
-            total_target_len = st.slider("Hedef Toplam Uzunluk", min_value=12, max_value=64, value=20)
+            user_keyword = st.text_input("Mandatory Keyword / Name Input", placeholder="e.g., projectAlpha")
+            total_target_len = st.slider("Target Total Length", min_value=12, max_value=64, value=20)
         with k2:
-            key_pos = st.selectbox("Kelime Yerleşimi", ["Başa Ekle", "Sona Ekle", "Rastgele Karıştır"])
-            wrap_sym = st.checkbox("Özel Sembollerle Çevrele", value=True)
+            key_pos = st.selectbox("Keyword Placement", ["Prepend (Start)", "Append (End)", "Randomized Mix"])
+            wrap_sym = st.checkbox("Surround with Special Symbols", value=True)
 
-        if st.button("ÖZEL KALIBI SENTEZLE", type="primary"):
+        if st.button("SYNTHESIZE CUSTOM PATTERN", type="primary"):
             if not user_keyword:
-                st.warning("[UYARI] Enjekte edilecek bir anahtar kelime girmelisiniz.")
+                st.warning("[WARNING] You must enter a keyword to inject.")
             else:
                 rem_len = max(4, total_target_len - len(user_keyword))
                 random_string = "".join(random.choices(string.ascii_letters + string.digits + "!@#$*", k=rem_len))
                 
-                if key_pos == "Başa Ekle":
+                if key_pos == "Prepend (Start)":
                     final_key = user_keyword + ("#" if wrap_sym else "") + random_string
-                elif key_pos == "Sona Ekle":
+                elif key_pos == "Append (End)":
                     final_key = random_string + ("#" if wrap_sym else "") + user_keyword
                 else:
                     mixed_list = list(user_keyword + random_string)
                     random.shuffle(mixed_list)
                     final_key = "".join(mixed_list)[:total_target_len]
                     
-                st.markdown("#### ÖZEL ENJEKSİYON ÇIKTISI")
+                st.markdown("#### CUSTOM INJECTION OUTPUT")
                 st.code(final_key, language="")
 
-    else: # Kriptografik Token ve Salt Üreteci
+    else: # Cryptic Token & Salt Generator
         t1, t2 = st.columns(2)
         with t1:
-            token_format = st.selectbox("Format Tipi", ["Hexadecimal (Hex)", "Base64", "URL-Safe Token", "Pure Numeric PIN"])
-            token_bytes = st.slider("Bayt / Uzunluk Değeri", min_value=8, max_value=128, value=32, step=4)
+            token_format = st.selectbox("Format Type", ["Hexadecimal (Hex)", "Base64", "URL-Safe Token", "Pure Numeric PIN"])
+            token_bytes = st.slider("Byte / Length Value", min_value=8, max_value=128, value=32, step=4)
         with t2:
-            st.markdown("**Açıklama:** Bu mod, veritabanı tuzlama (salting), API anahtarları veya güvenli oturum tokenleri üretmek için optimize edilmiştir.")
+            st.markdown("**Description:** This module is optimized for generating database salting, API keys, or secure session tokens.")
 
-        if st.button("TOKEN / SALT ÜRET", type="primary"):
+        if st.button("GENERATE TOKEN / SALT", type="primary"):
             if token_format == "Hexadecimal (Hex)":
                 raw_token = os.urandom(token_bytes).hex()
             elif token_format == "Base64":
@@ -400,54 +399,54 @@ with tab_generator:
             else:
                 raw_token = "".join(random.choices(string.digits, k=token_bytes))
 
-            st.markdown("#### KRİPTOGRAFİK TOKEN ÇIKTISI")
+            st.markdown("#### CRYPTOGRAPHIC TOKEN OUTPUT")
             st.code(raw_token, language="")
 
 # ==========================================
-# SEKME 3: ALGORİTMA VE UYUMLULUK MATRİSİ
+# TAB 3: ALGORITHMIC COMPLIANCE & ATTACK MATRIX
 # ==========================================
 with tab_matrix:
-    st.markdown("### KRİPTOGRAFİK ALGORİTMA VE DONANIM DİRENCİ MATRİSİ")
-    st.markdown("Güncel hash fonksiyonlarının ve anahtar türetme mekanizmalarının başarım karşılaştırma tablosu.")
+    st.markdown("### CRYPTOGRAPHIC ALGORITHM & HARDWARE RESISTANCE MATRIX")
+    st.markdown("Comparative performance table of modern hashing functions and key derivation mechanisms.")
 
     matrix_data = pd.DataFrame({
-        "Algoritma / Fonksiyon": [
+        "Algorithm / Function": [
             "MD5 (Legacy Hash)", 
             "SHA-256 (Secure Hash Standard)", 
             "Bcrypt (Adaptive Cost 12)", 
             "Argon2id (Memory-Hard Function)", 
             "PBKDF2-HMAC-SHA256"
         ],
-        "Saniyedeki İşlem Kapasitesi (GPU)": [
-            "~100 Milyar Hashes/sec", 
-            "~10 Milyar Hashes/sec", 
+        "Throughput / Hashes per Sec (GPU)": [
+            "~100 Billion Hashes/sec", 
+            "~10 Billion Hashes/sec", 
             "~50,000 Hashes/sec", 
-            "~1,000 Hashes/sec (Bellek Kısıtlı)", 
+            "~1,000 Hashes/sec (Memory Bound)", 
             "~20,000 Hashes/sec"
         ],
-        "ASIC / GPU Donanım Direnci": [
-            "Çok Düşük (Kırılabilir)", 
-            "Düşük (GPU Hızlandırmasına Açık)", 
-            "Yüksek (Bellek Maliyetli)", 
-            "Maksimum (Side-channel Dirençli)", 
-            "Orta Düzey (CPU/GPU Dengeli)"
+        "ASIC / GPU Hardware Resistance": [
+            "Extremely Low (Crackable)", 
+            "Low (GPU Acceleration Prone)", 
+            "High (Memory Costly)", 
+            "Maximum (Side-Channel Resistant)", 
+            "Medium (Balanced CPU/GPU)"
         ],
-        "Önerilen Kurumsal Kullanım Alanı": [
-            "Kullanımdan Kaldırıldı (Checksum Hariç)", 
-            "Bütünlük Doğrulama / Dijital İmza", 
-            "Geleneksel Parola Hashleme", 
-            "Modern Enterprise Kriptografi Standardı", 
+        "Recommended Enterprise Use Case": [
+            "Deprecated (Except Checksums)", 
+            "Integrity Verification / Digital Signatures", 
+            "Traditional Password Hashing", 
+            "Modern Enterprise Cryptography Standard", 
             "Key Derivation Functions (KDF)"
         ]
     })
 
     st.dataframe(matrix_data, use_container_width=True)
     
-    st.markdown("### STANDARTLAR VE MATEMATİKSEL FORMÜLASYONLAR")
+    st.markdown("### STANDARDS AND MATHEMATICAL FORMULATIONS")
     st.markdown("""
-    - **Shannon Entropi Denklemi:** $H = L \\times \\log_2(R)$ (Burada $L$ uzunluk, $R$ karakter havuzu büyüklüğünü ifade eder).
-    - **NIST SP 800-63B Uyumluluğu:** Kurumsal sistemlerde parola politikalarının ezber dayatması yerine uzunluğa (minimum 15-20 karakter) ve entropi değerine odaklanması gerektiğini savunur.
-    - **Salt ve Pepper Entegrasyonu:** Rainbow table saldırılarını tamamen etkisiz kılmak için her hash girdisine rastgele bit dizileri (salt) eklenmesi zorunludur.
+    - **Shannon Entropy Equation:** $H = L \\times \\log_2(R)$ (where $L$ represents length and $R$ represents character pool size).
+    - **NIST SP 800-63B Compliance:** Advocates that enterprise password policies should focus on length (minimum 15-20 characters) and entropy rather than arbitrary complexity mandates.
+    - **Salt and Pepper Integration:** Incorporating random bit strings (salt) into every hash input is mandatory to completely nullify pre-computed rainbow table attacks.
     """)
 
 st.markdown("---")
