@@ -1,4 +1,4 @@
-```markdown
+
 # 🔐 Cryptic - Advanced Password Security Suite
 
 A sleek, modern, and aesthetic web application built with Streamlit designed to analyze password strength, estimate brute-force crack times, and generate ultra-secure customizable passwords.
