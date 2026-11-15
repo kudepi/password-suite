@@ -83,7 +83,7 @@ cryptic/
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check out the [issues page](https://www.google.com/search?q=https://github.com/kudepi/cryptic/issues) if you want to contribute or suggest improvements.
+Contributions, issues, and feature requests are welcome! Feel free to check out the [issues page](https://github.com/kudepi/password-suite/issues) if you want to contribute or suggest improvements.
 
 ---
 
