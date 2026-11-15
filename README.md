@@ -65,7 +65,7 @@ Once executed, Streamlit will automatically generate local and network URLs in y
 
 You can access the live hosted version of the application here:
 
-👉 [https://password-suite.streamlit.app/](https://www.google.com/search?q=https://password-suite.streamlit.app/)
+👉 [https://password-suite.streamlit.app/](https://password-suite.streamlit.app/)
 
 ---
 
