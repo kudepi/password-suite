@@ -1,23 +1,21 @@
-MIT License / Custom Attribution Terms
+CRYPTIC SOURCE-AVAILABLE FREE ADAPTATION LICENSE (SAFAL)
 
-Copyright (c) 2026 kudepi
+Copyright (c) 2026 kudepi. All Rights Reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or share
-copies of the Software with other users for educational, personal, or collaborative 
-purposes, subject to the following conditions:
+1. GRANT OF FREE USE
+This software ("Software") is completely free of charge. You are granted permission to download, use, host, and share the Software for personal, educational, and non-commercial purposes, subject to the terms and conditions of this License.
 
-1. The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-2. Prominent and clear attribution must be given to the original creator and author, 
-kudepi, in any public distribution, shared repository, modification, or derivative work.
+2. STRICTLY NON-COMMERCIAL & NO-SALE
+The Software is strictly free. You are strictly prohibited from selling, renting, licensing, leasing, monetizing, or distributing the Software for any commercial purpose, fee, or financial gain. Any form of paid distribution, commercial exploitation, or marketing monetization is a direct violation of this License.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+3. MODIFICATION & ADAPTATION POLICY
+- Modifications and adaptations of the Software are permitted strictly for personal customization, environment setup, and integration adaptation.
+- Core security mechanisms, underlying base architecture, and critical structural components of the Software must remain intact, unmodified, and uncompromised. 
+- You may not claim ownership, origin, or original authorship of the modified or adapted work.
+
+4. ATTRIBUTION & SHARING
+- You may host, publish, and share the Software (or permitted adapted versions) on public repositories, websites, or code-sharing platforms, provided the software remains entirely free of charge to all users.
+- Prominent and clear attribution must be given to `kudepi` as the original creator, author, and owner of the Software in all copies, distributions, and repository pages. You are strictly forbidden from removing or altering the original creator's identity or replacing it with your own name.
+
+5. DISCLAIMER OF LIABILITY
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHOR OR COPYRIGHT HOLDER (kudepi) BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
